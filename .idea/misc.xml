@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/hasamy-microservices-pa4-main/ms-persona/pom.xml" />
+        <option value="$PROJECT_DIR$/hasamy-microservices-pa4-main/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/hasamy-microservices-pa4-main/ms-catalogo/pom.xml" />
+        <option value="$PROJECT_DIR$/hasamy-microservices-pa4-main/ms-finanzas/pom.xml" />
+        <option value="$PROJECT_DIR$/hasamy-microservices-pa4-main/ms-seguridad/pom.xml" />
+        <option value="$PROJECT_DIR$/hasamy-microservices-pa4-main/ms-operaciones/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-26" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
