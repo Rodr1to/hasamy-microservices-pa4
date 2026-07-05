@@ -3,16 +3,16 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Cliente;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ClienteServiceImpl implements ClienteService {
-    @Autowired
-    private ClienteRepository repository;
+    private final ClienteRepository repository;
 
     @Override
     public List<Cliente> listarTodos() {
@@ -22,6 +22,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Optional<Cliente> buscarPorId(Integer id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Cliente guardar(Cliente cliente) {
+        return repository.save(cliente);
     }
 
     @Override

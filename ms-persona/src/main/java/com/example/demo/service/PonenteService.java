@@ -7,6 +7,7 @@ import java.util.Optional;
 public interface PonenteService {
     List<Ponente> listarTodos();
     Optional<Ponente> buscarPorId(Integer id);
+    Ponente guardar(Ponente ponente);
     Ponente actualizar(Ponente ponente);
     void eliminar(Integer id);
 }

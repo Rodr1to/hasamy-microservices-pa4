@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.entity.Cliente;
@@ -9,10 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/persona/cliente")
+@RequiredArgsConstructor
 public class ClienteController {
 
-    @Autowired
-    private ClienteService service;
+    private final ClienteService service;
 
     @GetMapping
     public List<Cliente> listarTodos() {
@@ -27,13 +28,15 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente guardar(@RequestBody Cliente cliente) {
-        return service.actualizar(cliente);
+    public ResponseEntity<Cliente> guardar(@RequestBody Cliente cliente) {
+        cliente.setId(null);
+        Cliente creado = service.guardar(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> actualizar(@PathVariable Integer id, @RequestBody Cliente cliente) {
-        return service.buscarPorId(id).map(existingCliente -> {
+        return service.buscarPorId(id).map(c -> {
             cliente.setId(id);
             return ResponseEntity.ok(service.actualizar(cliente));
         }).orElse(ResponseEntity.notFound().build());
@@ -41,7 +44,7 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(existingCliente -> {
+        return service.buscarPorId(id).map(c -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

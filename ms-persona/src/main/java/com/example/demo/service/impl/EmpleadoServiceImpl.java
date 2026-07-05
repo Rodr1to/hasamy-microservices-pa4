@@ -3,16 +3,16 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Empleado;
 import com.example.demo.repository.EmpleadoRepository;
 import com.example.demo.service.EmpleadoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class EmpleadoServiceImpl implements EmpleadoService {
-    @Autowired
-    private EmpleadoRepository repository;
+    private final EmpleadoRepository repository;
 
     @Override
     public List<Empleado> listarTodos() {
@@ -20,8 +20,13 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public Optional<Empleado> buscarPorId (Integer id) {
+    public Optional<Empleado> buscarPorId(Integer id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Empleado guardar(Empleado empleado) {
+        return repository.save(empleado);
     }
 
     @Override

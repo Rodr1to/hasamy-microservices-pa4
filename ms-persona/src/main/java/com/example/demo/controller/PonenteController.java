@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.entity.Ponente;
@@ -9,10 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/persona/ponente")
+@RequiredArgsConstructor
 public class PonenteController {
 
-    @Autowired
-    private PonenteService service;
+    private final PonenteService service;
 
     @GetMapping
     public List<Ponente> listarTodos() {
@@ -27,13 +28,15 @@ public class PonenteController {
     }
 
     @PostMapping
-    public Ponente guardar(@RequestBody Ponente ponente) {
-        return service.actualizar(ponente);
+    public ResponseEntity<Ponente> guardar(@RequestBody Ponente ponente) {
+        ponente.setId(null);
+        Ponente creado = service.guardar(ponente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Ponente> actualizar(@PathVariable Integer id, @RequestBody Ponente ponente) {
-        return service.buscarPorId(id).map(existingPonente -> {
+        return service.buscarPorId(id).map(p -> {
             ponente.setId(id);
             return ResponseEntity.ok(service.actualizar(ponente));
         }).orElse(ResponseEntity.notFound().build());
@@ -41,7 +44,7 @@ public class PonenteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(existingPonente -> {
+        return service.buscarPorId(id).map(p -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

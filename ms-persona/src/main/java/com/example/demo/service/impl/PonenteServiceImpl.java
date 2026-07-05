@@ -3,16 +3,16 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Ponente;
 import com.example.demo.repository.PonenteRepository;
 import com.example.demo.service.PonenteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PonenteServiceImpl implements PonenteService {
-    @Autowired
-    private PonenteRepository repository;
+    private final PonenteRepository repository;
 
     @Override
     public List<Ponente> listarTodos() {
@@ -22,6 +22,11 @@ public class PonenteServiceImpl implements PonenteService {
     @Override
     public Optional<Ponente> buscarPorId(Integer id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Ponente guardar(Ponente ponente) {
+        return repository.save(ponente);
     }
 
     @Override
