@@ -9,7 +9,7 @@ import com.example.demo.service.EstadoHotelService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/estado-hotel")
+@RequestMapping("/api/catalogo/estadohotel")
 @RequiredArgsConstructor
 public class EstadoHotelController {
 

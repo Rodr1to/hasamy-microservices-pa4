@@ -9,7 +9,7 @@ import com.example.demo.service.TipoDocumentoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/tipo-documento")
+@RequestMapping("/api/catalogo/tipodocumento")
 @RequiredArgsConstructor
 public class TipoDocumentoController {
 

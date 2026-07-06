@@ -9,7 +9,7 @@ import com.example.demo.service.CategoriaZonaService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/categoria-zona")
+@RequestMapping("/api/catalogo/categoriazona")
 @RequiredArgsConstructor
 public class CategoriaZonaController {
 

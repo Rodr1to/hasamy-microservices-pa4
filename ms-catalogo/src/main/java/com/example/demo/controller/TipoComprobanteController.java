@@ -9,7 +9,7 @@ import com.example.demo.service.TipoComprobanteService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/tipo-comprobante")
+@RequestMapping("/api/catalogo/tipocomprobante")
 @RequiredArgsConstructor
 public class TipoComprobanteController {
 
