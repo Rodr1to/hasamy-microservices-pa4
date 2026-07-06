@@ -2,9 +2,8 @@ package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.example.demo.entity.MetodoPago;
+import com.example.demo.entity.MetodoPagoEntity;
 
 @Repository
-public interface MetodoPagoRepository extends JpaRepository<MetodoPago, Integer> {
-    
+public interface MetodoPagoRepository extends JpaRepository<MetodoPagoEntity, Integer> {
 }

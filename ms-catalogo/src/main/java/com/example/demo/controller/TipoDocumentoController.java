@@ -4,38 +4,38 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.MetodoPagoEntity;
-import com.example.demo.service.MetodoPagoService;
+import com.example.demo.entity.TipoDocumentoEntity;
+import com.example.demo.service.TipoDocumentoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/metodo-pago")
+@RequestMapping("/api/catalogo/tipo-documento")
 @RequiredArgsConstructor
-public class MetodoPagoController {
+public class TipoDocumentoController {
 
-    private final MetodoPagoService service;
+    private final TipoDocumentoService service;
 
     @GetMapping
-    public List<MetodoPagoEntity> listarTodos() {
+    public List<TipoDocumentoEntity> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MetodoPagoEntity> obtenerPorId(@PathVariable Integer id) {
+    public ResponseEntity<TipoDocumentoEntity> obtenerPorId(@PathVariable Integer id) {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<MetodoPagoEntity> guardar(@RequestBody MetodoPagoEntity entity) {
+    public ResponseEntity<TipoDocumentoEntity> guardar(@RequestBody TipoDocumentoEntity entity) {
         entity.setId(null);
-        MetodoPagoEntity creado = service.guardar(entity);
+        TipoDocumentoEntity creado = service.guardar(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MetodoPagoEntity> actualizar(@PathVariable Integer id, @RequestBody MetodoPagoEntity entity) {
+    public ResponseEntity<TipoDocumentoEntity> actualizar(@PathVariable Integer id, @RequestBody TipoDocumentoEntity entity) {
         return service.buscarPorId(id).map(x -> {
             entity.setId(id);
             return ResponseEntity.ok(service.actualizar(entity));

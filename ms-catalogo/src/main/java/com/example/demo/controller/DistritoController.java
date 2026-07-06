@@ -4,38 +4,38 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.MetodoPagoEntity;
-import com.example.demo.service.MetodoPagoService;
+import com.example.demo.entity.DistritoEntity;
+import com.example.demo.service.DistritoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/metodo-pago")
+@RequestMapping("/api/catalogo/distrito")
 @RequiredArgsConstructor
-public class MetodoPagoController {
+public class DistritoController {
 
-    private final MetodoPagoService service;
+    private final DistritoService service;
 
     @GetMapping
-    public List<MetodoPagoEntity> listarTodos() {
+    public List<DistritoEntity> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MetodoPagoEntity> obtenerPorId(@PathVariable Integer id) {
+    public ResponseEntity<DistritoEntity> obtenerPorId(@PathVariable Integer id) {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<MetodoPagoEntity> guardar(@RequestBody MetodoPagoEntity entity) {
+    public ResponseEntity<DistritoEntity> guardar(@RequestBody DistritoEntity entity) {
         entity.setId(null);
-        MetodoPagoEntity creado = service.guardar(entity);
+        DistritoEntity creado = service.guardar(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MetodoPagoEntity> actualizar(@PathVariable Integer id, @RequestBody MetodoPagoEntity entity) {
+    public ResponseEntity<DistritoEntity> actualizar(@PathVariable Integer id, @RequestBody DistritoEntity entity) {
         return service.buscarPorId(id).map(x -> {
             entity.setId(id);
             return ResponseEntity.ok(service.actualizar(entity));

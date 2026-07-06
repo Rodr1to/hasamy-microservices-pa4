@@ -1,28 +1,23 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "metodo_pago")
-public class MetodoPago {
+@Table(name = "categoria_zona")
+public class CategoriaZonaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_metp")
+    @Column(name = "cod_catz")
     private Integer id;
 
-    @Column(name = "nom_metp")
+    @Column(name = "nom_catz", nullable = false, length = 50, unique = true)
     private String nombre;
 
-    @Column(name = "est_metp")
-    private Boolean estado;
+    @Column(name = "est_catz", nullable = false)
+    private Boolean estado = true;
 
-    public MetodoPago() {
+    public CategoriaZonaEntity() {
     }
 
     public Integer getId() {
