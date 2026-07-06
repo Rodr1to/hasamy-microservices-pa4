@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comprobante_pago")
-public class Comprobante_Pago {
+public class ComprobantePago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Comprobante_Pago {
 
     //Autogenerado
 
-    public Comprobante_Pago() {
+    public ComprobantePago() {
     }
 
     public Integer getId() {

@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "salon_belleza")
-public class Salon_Belleza {
+public class SalonBelleza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class Salon_Belleza {
 
 
     //Autogenerado
-    public Salon_Belleza() {}
+    public SalonBelleza() {}
 
     public Integer getId() {
         return id;

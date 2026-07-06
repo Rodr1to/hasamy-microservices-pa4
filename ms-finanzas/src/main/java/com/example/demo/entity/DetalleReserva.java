@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "detalle_reserva")
-public class Detalle_Reserva {
+public class DetalleReserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Detalle_Reserva {
     //Autogenerado
 
 
-    public Detalle_Reserva() {
+    public DetalleReserva() {
     }
 
     public Integer getId() {

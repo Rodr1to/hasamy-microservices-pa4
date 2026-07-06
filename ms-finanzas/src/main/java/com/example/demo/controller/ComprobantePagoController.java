@@ -3,35 +3,35 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.Comprobante_Pago;
-import com.example.demo.service.Comprobante_PagoService;
+import com.example.demo.entity.ComprobantePago;
+import com.example.demo.service.ComprobantePagoService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/finanzas/comprobante-pago")
-public class Comprobante_PagoController {
+public class ComprobantePagoController {
 
     @Autowired
-    private Comprobante_PagoService service;
+    private ComprobantePagoService service;
 
     @GetMapping
-    public List<Comprobante_Pago> listarTodos() {
+    public List<ComprobantePago> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public Comprobante_Pago obtenerPorId(@PathVariable Integer id) {
+    public ComprobantePago obtenerPorId(@PathVariable Integer id) {
         return service.obtenerPorId(id);
     }
 
     @PostMapping
-    public Comprobante_Pago guardar(@RequestBody Comprobante_Pago comprobantePago) {
+    public ComprobantePago guardar(@RequestBody ComprobantePago comprobantePago) {
         return service.guardar(comprobantePago);
     }
 
     @PutMapping("/{id}")
-    public Comprobante_Pago actualizar(@PathVariable Integer id, @RequestBody Comprobante_Pago comprobantePago) {
+    public ComprobantePago actualizar(@PathVariable Integer id, @RequestBody ComprobantePago comprobantePago) {
         return service.actualizar(id, comprobantePago);
     }
 

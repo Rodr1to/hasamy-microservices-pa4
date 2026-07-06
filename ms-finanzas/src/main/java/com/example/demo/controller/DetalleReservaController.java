@@ -3,35 +3,35 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.Detalle_Reserva;
-import com.example.demo.service.Detalle_ReservaService;
+import com.example.demo.entity.DetalleReserva;
+import com.example.demo.service.DetalleReservaService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/finanzas/detalle-reserva")
-public class Detalle_ReservaController {
+public class DetalleReservaController {
 
     @Autowired
-    private Detalle_ReservaService service;
+    private DetalleReservaService service;
 
     @GetMapping
-    public List<Detalle_Reserva> listarTodos() {
+    public List<DetalleReserva> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public Detalle_Reserva obtenerPorId(@PathVariable Integer id) {
+    public DetalleReserva obtenerPorId(@PathVariable Integer id) {
         return service.obtenerPorId(id);
     }
 
     @PostMapping
-    public Detalle_Reserva guardar(@RequestBody Detalle_Reserva detalleReserva) {
+    public DetalleReserva guardar(@RequestBody DetalleReserva detalleReserva) {
         return service.guardar(detalleReserva);
     }
 
     @PutMapping("/{id}")
-    public Detalle_Reserva actualizar(@PathVariable Integer id, @RequestBody Detalle_Reserva detalleReserva) {
+    public DetalleReserva actualizar(@PathVariable Integer id, @RequestBody DetalleReserva detalleReserva) {
         return service.actualizar(id, detalleReserva);
     }
 

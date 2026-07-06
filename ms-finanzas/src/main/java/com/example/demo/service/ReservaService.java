@@ -1,36 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Reserva;
-import com.example.demo.repository.ReservaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ReservaService {
+public interface ReservaService {
 
-    @Autowired
-    private ReservaRepository repository;
+    List<Reserva> listarTodos();
 
-    public List<Reserva> listarTodos() {
-        return repository.findAll();
-    }
+    Reserva obtenerPorId(Integer id);
 
-    public Reserva obtenerPorId(Integer id) {
-        return repository.findById(id).orElseThrow();
-    }
+    Reserva guardar(Reserva reserva);
 
-    public Reserva guardar(Reserva reserva) {
-        return repository.save(reserva);
-    }
+    Reserva actualizar(Integer id, Reserva reserva);
 
-    public Reserva actualizar(Integer id, Reserva reserva) {
-        reserva.setId(id);
-        return repository.save(reserva);
-    }
-
-    public void eliminar(Integer id) {
-        repository.deleteById(id);
-    }
+    void eliminar(Integer id);
 }

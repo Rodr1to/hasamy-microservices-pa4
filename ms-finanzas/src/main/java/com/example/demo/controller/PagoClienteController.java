@@ -3,35 +3,35 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.Pago_Cliente;
-import com.example.demo.service.Pago_ClienteService;
+import com.example.demo.entity.PagoCliente;
+import com.example.demo.service.PagoClienteService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/finanzas/pago-cliente")
-public class Pago_ClienteController {
+public class PagoClienteController {
 
     @Autowired
-    private Pago_ClienteService service;
+    private PagoClienteService service;
 
     @GetMapping
-    public List<Pago_Cliente> listarTodos() {
+    public List<PagoCliente> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public Pago_Cliente obtenerPorId(@PathVariable Integer id) {
+    public PagoCliente obtenerPorId(@PathVariable Integer id) {
         return service.obtenerPorId(id);
     }
 
     @PostMapping
-    public Pago_Cliente guardar(@RequestBody Pago_Cliente pagoCliente) {
+    public PagoCliente guardar(@RequestBody PagoCliente pagoCliente) {
         return service.guardar(pagoCliente);
     }
 
     @PutMapping("/{id}")
-    public Pago_Cliente actualizar(@PathVariable Integer id, @RequestBody Pago_Cliente pagoCliente) {
+    public PagoCliente actualizar(@PathVariable Integer id, @RequestBody PagoCliente pagoCliente) {
         return service.actualizar(id, pagoCliente);
     }
 
