@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.Reserva;
-import com.example.demo.repository.ReservaRepository;
+import com.example.demo.service.ReservaService;
 
 import java.util.List;
 
@@ -13,31 +13,30 @@ import java.util.List;
 public class ReservaController {
 
     @Autowired
-    private ReservaRepository repository;
+    private ReservaService service;
 
     @GetMapping
     public List<Reserva> listarTodos() {
-        return repository.findAll();
+        return service.listarTodos();
     }
 
     @GetMapping("/{id}")
     public Reserva obtenerPorId(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow();
+        return service.obtenerPorId(id);
     }
 
     @PostMapping
     public Reserva guardar(@RequestBody Reserva reserva) {
-        return repository.save(reserva);
+        return service.guardar(reserva);
     }
 
     @PutMapping("/{id}")
     public Reserva actualizar(@PathVariable Integer id, @RequestBody Reserva reserva) {
-        reserva.setId(id);
-        return repository.save(reserva);
+        return service.actualizar(id, reserva);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Integer id) {
-        repository.deleteById(id);
+        service.eliminar(id);
     }
 }

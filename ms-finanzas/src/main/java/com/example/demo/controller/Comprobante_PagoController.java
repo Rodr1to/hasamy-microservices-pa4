@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.Comprobante_Pago;
-import com.example.demo.repository.Comprobante_PagoRepository;
+import com.example.demo.service.Comprobante_PagoService;
 
 import java.util.List;
 
@@ -13,31 +13,30 @@ import java.util.List;
 public class Comprobante_PagoController {
 
     @Autowired
-    private Comprobante_PagoRepository repository;
+    private Comprobante_PagoService service;
 
     @GetMapping
     public List<Comprobante_Pago> listarTodos() {
-        return repository.findAll();
+        return service.listarTodos();
     }
 
     @GetMapping("/{id}")
     public Comprobante_Pago obtenerPorId(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow();
+        return service.obtenerPorId(id);
     }
 
     @PostMapping
     public Comprobante_Pago guardar(@RequestBody Comprobante_Pago comprobantePago) {
-        return repository.save(comprobantePago);
+        return service.guardar(comprobantePago);
     }
 
     @PutMapping("/{id}")
     public Comprobante_Pago actualizar(@PathVariable Integer id, @RequestBody Comprobante_Pago comprobantePago) {
-        comprobantePago.setId(id);
-        return repository.save(comprobantePago);
+        return service.actualizar(id, comprobantePago);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Integer id) {
-        repository.deleteById(id);
+        service.eliminar(id);
     }
 }
