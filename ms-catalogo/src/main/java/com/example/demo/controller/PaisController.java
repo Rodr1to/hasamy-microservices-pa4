@@ -36,15 +36,16 @@ public class PaisController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PaisEntity> actualizar(@PathVariable Integer id, @RequestBody PaisEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(p -> {
+            p.setNombre(entity.getNombre());
+            p.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(p));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(p -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

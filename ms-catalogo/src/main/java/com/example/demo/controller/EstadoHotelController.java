@@ -36,15 +36,16 @@ public class EstadoHotelController {
 
     @PutMapping("/{id}")
     public ResponseEntity<EstadoHotelEntity> actualizar(@PathVariable Integer id, @RequestBody EstadoHotelEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(eh -> {
+            eh.setNombre(entity.getNombre());
+            eh.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(eh));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(eh -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

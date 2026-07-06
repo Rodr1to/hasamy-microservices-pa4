@@ -36,15 +36,16 @@ public class SexoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SexoEntity> actualizar(@PathVariable Integer id, @RequestBody SexoEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(s -> {
+            s.setNombre(entity.getNombre());
+            s.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(s));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(s -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

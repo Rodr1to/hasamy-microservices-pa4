@@ -36,15 +36,16 @@ public class DistritoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<DistritoEntity> actualizar(@PathVariable Integer id, @RequestBody DistritoEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(d -> {
+            d.setNombre(entity.getNombre());
+            d.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(d));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(d -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

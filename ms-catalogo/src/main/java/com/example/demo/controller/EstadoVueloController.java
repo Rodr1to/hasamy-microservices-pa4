@@ -36,15 +36,16 @@ public class EstadoVueloController {
 
     @PutMapping("/{id}")
     public ResponseEntity<EstadoVueloEntity> actualizar(@PathVariable Integer id, @RequestBody EstadoVueloEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(ev -> {
+            ev.setNombre(entity.getNombre());
+            ev.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(ev));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(ev -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

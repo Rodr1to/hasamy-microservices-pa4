@@ -36,15 +36,16 @@ public class TipoComprobanteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TipoComprobanteEntity> actualizar(@PathVariable Integer id, @RequestBody TipoComprobanteEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(tc -> {
+            tc.setNombre(entity.getNombre());
+            tc.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(tc));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(tc -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

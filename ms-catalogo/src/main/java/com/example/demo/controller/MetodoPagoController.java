@@ -36,15 +36,16 @@ public class MetodoPagoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MetodoPagoEntity> actualizar(@PathVariable Integer id, @RequestBody MetodoPagoEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(mp -> {
+            mp.setNombre(entity.getNombre());
+            mp.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(mp));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(mp -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());

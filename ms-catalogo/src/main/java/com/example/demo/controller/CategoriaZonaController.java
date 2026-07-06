@@ -36,15 +36,16 @@ public class CategoriaZonaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaZonaEntity> actualizar(@PathVariable Integer id, @RequestBody CategoriaZonaEntity entity) {
-        return service.buscarPorId(id).map(x -> {
-            entity.setId(id);
-            return ResponseEntity.ok(service.actualizar(entity));
+        return service.buscarPorId(id).map(cz -> {
+            cz.setNombre(entity.getNombre());
+            cz.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(cz));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(x -> {
+        return service.buscarPorId(id).map(cz -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());
