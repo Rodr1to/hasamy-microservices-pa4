@@ -4,48 +4,48 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.MetodoPagoEntity;
-import com.example.demo.service.MetodoPagoService;
+import com.example.demo.entity.TipoDocumentoEntity;
+import com.example.demo.service.TipoDocumentoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogo/metodopago")
+@RequestMapping("/api/catalogo/tipodocumento")
 @RequiredArgsConstructor
-public class MetodoPagoController {
+public class TipoDocumentoController {
 
-    private final MetodoPagoService service;
+    private final TipoDocumentoService service;
 
     @GetMapping
-    public List<MetodoPagoEntity> listarTodos() {
+    public List<TipoDocumentoEntity> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MetodoPagoEntity> obtenerPorId(@PathVariable Integer id) {
+    public ResponseEntity<TipoDocumentoEntity> obtenerPorId(@PathVariable Integer id) {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<MetodoPagoEntity> guardar(@RequestBody MetodoPagoEntity entity) {
+    public ResponseEntity<TipoDocumentoEntity> guardar(@RequestBody TipoDocumentoEntity entity) {
         entity.setId(null);
-        MetodoPagoEntity creado = service.guardar(entity);
+        TipoDocumentoEntity creado = service.guardar(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MetodoPagoEntity> actualizar(@PathVariable Integer id, @RequestBody MetodoPagoEntity entity) {
-        return service.buscarPorId(id).map(mp -> {
-            mp.setNombre(entity.getNombre());
-            mp.setEstado(entity.getEstado());
-            return ResponseEntity.ok(service.actualizar(mp));
+    public ResponseEntity<TipoDocumentoEntity> actualizar(@PathVariable Integer id, @RequestBody TipoDocumentoEntity entity) {
+        return service.buscarPorId(id).map(td -> {
+            td.setNombre(entity.getNombre());
+            td.setEstado(entity.getEstado());
+            return ResponseEntity.ok(service.actualizar(td));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(mp -> {
+        return service.buscarPorId(id).map(td -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());
