@@ -4,50 +4,48 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.Usuario;
-import com.example.demo.service.UsuarioService;
+import com.example.demo.entity.ModuloSistema;
+import com.example.demo.service.ModuloSistemaService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/seguridad/usuario")
+@RequestMapping("/api/seguridad/modulosistema")
 @RequiredArgsConstructor
-public class UsuarioController {
+public class ModuloSistemaController {
 
-    private final UsuarioService service;
+    private final ModuloSistemaService service;
 
     @GetMapping
-    public List<Usuario> listarTodos() {
+    public List<ModuloSistema> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> obtenerPorId(@PathVariable Integer id) {
+    public ResponseEntity<ModuloSistema> obtenerPorId(@PathVariable Integer id) {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario) {
-        usuario.setId(null);
-        Usuario creado = service.guardar(usuario);
+    public ResponseEntity<ModuloSistema> guardar(@RequestBody ModuloSistema moduloSistema) {
+        moduloSistema.setId(null);
+        ModuloSistema creado = service.guardar(moduloSistema);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizar(@PathVariable Integer id, @RequestBody Usuario usuario) {
-        return service.buscarPorId(id).map(u -> {
-            u.setClave(usuario.getClave());
-            u.setEstado(usuario.getEstado());
-            u.setNombreUsuario(usuario.getNombreUsuario());
-            u.setEmpleadoId(usuario.getEmpleadoId());
-            return ResponseEntity.ok(service.actualizar(u));
+    public ResponseEntity<ModuloSistema> actualizar(@PathVariable Integer id, @RequestBody ModuloSistema moduloSistema) {
+        return service.buscarPorId(id).map(ms -> {
+            ms.setNombre(moduloSistema.getNombre());
+            ms.setEstado(moduloSistema.getEstado());
+            return ResponseEntity.ok(service.actualizar(ms));
         }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        return service.buscarPorId(id).map(u -> {
+        return service.buscarPorId(id).map(m -> {
             service.eliminar(id);
             return ResponseEntity.noContent().<Void>build();
         }).orElse(ResponseEntity.notFound().build());
