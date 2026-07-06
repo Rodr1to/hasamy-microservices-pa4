@@ -28,4 +28,57 @@ public class Comprobante_Pago {
 
     @Column(name = "cod_tipc", nullable = false)
     private Integer codTipoComprobante;
+
+    //Autogenerado
+
+    public Comprobante_Pago() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNumeroComprobante() {
+        return numeroComprobante;
+    }
+
+    public void setNumeroComprobante(String numeroComprobante) {
+        this.numeroComprobante = numeroComprobante;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public Integer getCodReserva() {
+        return codReserva;
+    }
+
+    public void setCodReserva(Integer codReserva) {
+        this.codReserva = codReserva;
+    }
+
+    public Integer getCodTipoComprobante() {
+        return codTipoComprobante;
+    }
+
+    public void setCodTipoComprobante(Integer codTipoComprobante) {
+        this.codTipoComprobante = codTipoComprobante;
+    }
 }
